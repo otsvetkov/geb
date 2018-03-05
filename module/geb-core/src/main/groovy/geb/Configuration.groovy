@@ -414,6 +414,13 @@ class Configuration {
     }
 
     /**
+     * Returns the config value {@code useUrlFragments}.
+     */
+    boolean getUseUrlFragments() {
+        readValue('useUrlFragments', true)
+    }
+
+    /**
      * Creates the navigator factory to be used.
      *
      * Returns {@link BrowserBackedNavigatorFactory} by default.

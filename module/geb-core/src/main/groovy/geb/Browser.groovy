@@ -528,11 +528,19 @@ class Browser {
      * Sends the browser to the given url with the given query params and fragment. If the url is relative it is resolved against the {@link #getBaseUrl() base url}.
      */
     void go(Map params = [:], String url = null, UrlFragment fragment = null) {
-        def newUri = calculateUri(url, params, fragment)
+        def newUri = config.useUrlFragments ? calculateUri(url, params, fragment) : calculateUri(url, params)
         def currentUri = retrieveCurrentUri()
-        driver.get(newUri.toString())
-        if (sameUrlWithDifferentFragment(currentUri, newUri)) {
-            driver.navigate().refresh()
+        if (config.useUrlFragments) {
+            driver.get(newUri.toString())
+            if (sameUrlWithDifferentFragment(currentUri, newUri)) {
+                driver.navigate().refresh()
+            }
+        } else {
+            if (currentUri == newUri) {
+                driver.navigate().refresh()
+            } else {
+                driver.get(newUri.toString())
+            }
         }
         if (!page) {
             page(Page)
@@ -1103,6 +1111,18 @@ class Browser {
         }
 
         new URI(uriStringBuilder.toString())
+    }
+
+    private URI calculateUri(String path, Map params) {
+        def absolute = calculateAbsoluteUri(path)
+
+        def queryString = toQueryString(params)
+        if (queryString) {
+            def joiner = absolute.query ? '&' : '?'
+            new URI(absolute.toString() + joiner + queryString)
+        } else {
+            new URI(absolute.toString())
+        }
     }
 
     private URI calculateAbsoluteUri(String path) {

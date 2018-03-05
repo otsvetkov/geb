@@ -392,7 +392,7 @@ class Page implements Navigable, PageContentContainer, Initializable, WaitingSup
     }
 
     boolean getShouldVerifyAtImplicitly() {
-        atChecker || browser.config.requirePageAtCheckers
+        getAtChecker() || browser.config.requirePageAtCheckers
     }
 
     void at(Object... args) {
@@ -413,7 +413,7 @@ class Page implements Navigable, PageContentContainer, Initializable, WaitingSup
      * @throws AssertionError if this page's "at checker" doesn't pass (with implicit assertions enabled)
      */
     private boolean verifyThisPageAtOnly(boolean honourGlobalAtCheckWaiting) {
-        Closure verifier = atChecker?.clone()
+        Closure verifier = getAtChecker()?.clone()
         if (verifier) {
             verifier.delegate = this
             verifier.resolveStrategy = Closure.DELEGATE_FIRST
