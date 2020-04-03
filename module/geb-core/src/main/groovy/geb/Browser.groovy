@@ -539,6 +539,7 @@ class Browser {
             if (currentUri == newUri) {
                 driver.navigate().refresh()
             } else {
+                driver.switchTo().defaultContent()
                 driver.get(newUri.toString())
             }
         }

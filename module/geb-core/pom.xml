@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>geb-core</artifactId>
-    <version>3.3-TS</version>
+    <version>3.4-TS</version>
     <name>Geb core</name>
     <groupId>org.gebish</groupId>
     <packaging>jar</packaging>
@@ -95,12 +95,12 @@
         <dependency>
             <groupId>org.gebish</groupId>
             <artifactId>geb-ast</artifactId>
-            <version>3.3</version>
+            <version>3.4</version>
         </dependency>
         <dependency>
             <groupId>org.gebish</groupId>
             <artifactId>geb-waiting</artifactId>
-            <version>3.3</version>
+            <version>3.4</version>
         </dependency>
         <dependency>
             <groupId>org.jodd</groupId>
